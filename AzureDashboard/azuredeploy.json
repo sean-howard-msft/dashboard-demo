@@ -4,12 +4,15 @@
   "parameters": {
     "WebsiteName": {
       "type": "string"
+    },
+    "AppInsightsName": {
+      "type": "string"
+    },
+    "CDN_Name": {
+      "type": "string"
     }
   },
-  "variables": {
-    "AppInsightsName": "[concat(parameters('WebsiteName'), 'Insights')]",
-    "CDN_Name": "[concat(parameters('WebsiteName'), 'CDN')]"
-  },
+  "variables": {},
   "resources": [
     {
       "properties": {
@@ -28,7 +31,7 @@
                   "inputs": [
                     {
                       "name": "id",
-                      "value": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                      "value": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                     },
                     {
                       "name": "Version",
@@ -92,7 +95,7 @@
                     },
                     {
                       "name": "ResourceId",
-                      "value": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                      "value": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                     }
                   ],
                   "type": "Extension/AppInsightsExtension/PartType/QuickPulseButtonSmallPart",
@@ -304,7 +307,7 @@
                   "inputs": [
                     {
                       "name": "ResourceId",
-                      "value": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                      "value": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                     },
                     {
                       "name": "DataModel",
@@ -367,7 +370,7 @@
                   "inputs": [
                     {
                       "name": "ResourceId",
-                      "value": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                      "value": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                     },
                     {
                       "name": "DataModel",
@@ -503,7 +506,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "ByteHitRatio",
                               "aggregationType": 4,
@@ -514,7 +517,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "RequestCount",
                               "aggregationType": 1,
@@ -525,7 +528,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "ResponseSize",
                               "aggregationType": 1,
@@ -536,7 +539,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "TotalLatency",
                               "aggregationType": 4,
@@ -590,7 +593,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "ByteHitRatio",
                               "aggregationType": 4,
@@ -601,7 +604,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "RequestCount",
                               "aggregationType": 1,
@@ -612,7 +615,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "ResponseSize",
                               "aggregationType": 1,
@@ -623,7 +626,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                                "id": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                               },
                               "name": "TotalLatency",
                               "aggregationType": 4,
@@ -685,7 +688,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "sessions/count",
                               "aggregationType": 5,
@@ -697,7 +700,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "users/count",
                               "aggregationType": 5,
@@ -733,7 +736,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "segmentationUsers"
                               }
                             }
@@ -754,7 +757,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "sessions/count",
                               "aggregationType": 5,
@@ -766,7 +769,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "users/count",
                               "aggregationType": 5,
@@ -803,7 +806,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "segmentationUsers"
                               }
                             }
@@ -830,7 +833,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "requests/failed",
                               "aggregationType": 7,
@@ -866,7 +869,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "failures"
                               }
                             }
@@ -887,7 +890,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "requests/failed",
                               "aggregationType": 7,
@@ -924,7 +927,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "failures"
                               }
                             }
@@ -951,7 +954,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "requests/duration",
                               "aggregationType": 4,
@@ -987,7 +990,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "performance"
                               }
                             }
@@ -1008,7 +1011,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "requests/duration",
                               "aggregationType": 4,
@@ -1045,7 +1048,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "performance"
                               }
                             }
@@ -1072,7 +1075,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/networkDuration",
                               "aggregationType": 4,
@@ -1084,7 +1087,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/processingDuration",
                               "aggregationType": 4,
@@ -1096,7 +1099,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/sendDuration",
                               "aggregationType": 4,
@@ -1108,7 +1111,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/receiveDuration",
                               "aggregationType": 4,
@@ -1154,7 +1157,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/networkDuration",
                               "aggregationType": 4,
@@ -1166,7 +1169,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/processingDuration",
                               "aggregationType": 4,
@@ -1178,7 +1181,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/sendDuration",
                               "aggregationType": 4,
@@ -1190,7 +1193,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "browserTimings/receiveDuration",
                               "aggregationType": 4,
@@ -1243,7 +1246,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "availabilityResults/availabilityPercentage",
                               "aggregationType": 4,
@@ -1279,7 +1282,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "availability"
                               }
                             }
@@ -1300,7 +1303,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "availabilityResults/availabilityPercentage",
                               "aggregationType": 4,
@@ -1337,7 +1340,7 @@
                               "extensionName": "HubsExtension",
                               "bladeName": "ResourceMenuBlade",
                               "parameters": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]",
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]",
                                 "menuid": "availability"
                               }
                             }
@@ -1364,7 +1367,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "exceptions/server",
                               "aggregationType": 7,
@@ -1376,7 +1379,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "dependencies/failed",
                               "aggregationType": 7,
@@ -1422,7 +1425,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "exceptions/server",
                               "aggregationType": 7,
@@ -1434,7 +1437,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "dependencies/failed",
                               "aggregationType": 7,
@@ -1487,7 +1490,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processorCpuPercentage",
                               "aggregationType": 4,
@@ -1499,7 +1502,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processCpuPercentage",
                               "aggregationType": 4,
@@ -1545,7 +1548,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processorCpuPercentage",
                               "aggregationType": 4,
@@ -1557,7 +1560,7 @@
                             },
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processCpuPercentage",
                               "aggregationType": 4,
@@ -1610,7 +1613,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "exceptions/browser",
                               "aggregationType": 7,
@@ -1656,7 +1659,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "exceptions/browser",
                               "aggregationType": 7,
@@ -1798,7 +1801,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "availabilityResults/count",
                               "aggregationType": 7,
@@ -1844,7 +1847,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "availabilityResults/count",
                               "aggregationType": 7,
@@ -1897,7 +1900,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processIOBytesPerSecond",
                               "aggregationType": 4,
@@ -1943,7 +1946,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/processIOBytesPerSecond",
                               "aggregationType": 4,
@@ -1996,7 +1999,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/memoryAvailableBytes",
                               "aggregationType": 4,
@@ -2042,7 +2045,7 @@
                           "metrics": [
                             {
                               "resourceMetadata": {
-                                "id": "[resourceId('Microsoft.Insights/Components', variables('AppInsightsName'))]"
+                                "id": "[resourceId('Microsoft.Insights/Components', parameters('AppInsightsName'))]"
                               },
                               "name": "performanceCounters/memoryAvailableBytes",
                               "aggregationType": 4,
@@ -2095,7 +2098,7 @@
                     },
                     {
                       "name": "id",
-                      "value": "[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]"
+                      "value": "[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]"
                     },
                     {
                       "name": "skuName",
@@ -2104,7 +2107,7 @@
                     }
                   ],
                   "type": "Extension/Microsoft_Azure_Cdn/PartType/ProfilePinnedPart",
-                  "deepLink": "#@microsoft.onmicrosoft.com/resource[resourceId('Microsoft.Insights/cdn', variables('CDN_Name'))]/overview"
+                  "deepLink": "#@microsoft.onmicrosoft.com/resource[resourceId('Microsoft.Insights/cdn', parameters('CDN_Name'))]/overview"
                 }
               }
             }
