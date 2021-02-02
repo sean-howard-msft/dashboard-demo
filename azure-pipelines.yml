@@ -7,13 +7,60 @@
 #- master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Hosted Windows 2019 with VS2019
 
 steps:
 - task: AzurePowerShell@5
+  name: GetVars
+  displayName: Get Variables
   inputs:
     azureSubscription: $(azureSubscription)
-    ScriptType: 'FilePath'
-    ScriptPath: $(ScriptPath)
-    ScriptArguments: '-ResourceGroupLocation $(ResourceGroupLocation) -ResourceGroupName $(ResourceGroupName) -TemplateFile $(TemplateFile) -TemplateParametersFile $(TemplateParametersFile)'
+    ScriptType: 'InlineScript'
+    Inline: |
+      function Get-Resources {
+          param(
+              [Parameter(Mandatory=$true)]
+              [string]
+              $WebAppNameString
+          )
+
+          $GetWebSite = Get-AzWebApp -Name $WebAppNameString
+          $AppSettings = $GetWebSite.SiteConfig.AppSettings
+          $ResourceGroupName = $GetWebSite.resourceGroup.Trim()
+          $AppInsightsKey = $AppSettings | Where-Object {$_.Name -eq "APPINSIGHTS_INSTRUMENTATIONKEY"}
+          $AppInsights = Get-AzApplicationInsights -ResourceGroupName $ResourceGroupName | Where-Object {$_.InstrumentationKey -eq $AppInsightsKey.Value}
+          $CDNURL = $AppSettings | Where-Object {$_.Name -eq "WEBAPP_CDNBASE_URL"}
+
+          $AppInsightsName = $AppInsights.name
+          $CDNName = $CDNURL.Value.substring(0,$CDNURL.Value.indexOf("."))
+          $subscriptionId = $GetWebSite.id.substring(15,36)
+          $location = $GetWebSite.location
+      }
+      Get-Resources -WebAppNameString OETDemoApp
     azurePowerShellVersion: 'LatestVersion'
+
+- script: |
+    echo $(azureSubscription)
+    echo $(subscriptionId)
+    echo $(resourceGroupName)
+    echo $(location)
+    echo $(AppInsightsName)
+    echo $(CDN_Name)
+
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'Deploy ARM Templates'
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: $(azureSubscription)
+    subscriptionId: $(subscriptionId)
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: $(resourceGroupName)
+    location: 'westus2'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(TemplateFile)'
+    overrideParameters: |
+      -WebsiteName $(WebAppName)  
+      -AppInsightsName $(AppInsightsName) 
+      -CDN_Name $(CDN_Name)
+    deploymentMode: 'Incremental'
+    deploymentOutputs: 'ArmOutputs'
